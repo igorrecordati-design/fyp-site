@@ -4,3 +4,36 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+# Old Online Coaching page -> new Apply page (permanent).
+# Netlify drops the #fragment server-side, so old links like
+# /online-coaching.html#apply-section simply land on /apply.
+[[redirects]]
+  from = "/online-coaching"
+  to = "/apply#online"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/online-coaching.html"
+  to = "/apply#online"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/online-coaching/*"
+  to = "/apply#online"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
